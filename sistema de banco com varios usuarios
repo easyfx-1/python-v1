@@ -1,0 +1,114 @@
+usuarios = {}
+
+while True:
+    print('BEM VINDO AO ALBERTOEINSTEINBANK\n')
+    print('1 - Login')
+    print('2 - Cadastrar')
+    
+    #ESCOLHA
+    opcao = input('Digite o que deseja: ')
+    if opcao == '1':
+        
+        #LOGIN
+        username = input('Digite seu nome de usuario: ').lower()
+        if username in usuarios:
+            digite_sua_senha = input('Digite sua senha: ')
+            if digite_sua_senha == usuarios[username]['senha']:
+                print(f'Bem-vindo, {username}!')
+                
+                while True:
+                    print(f'Conta: {username}')
+                    print('1 - Saldo')
+                    print('2 - Depositar')
+                    print('3 - Sacar')
+                    print('4 - Sair')
+                    
+                    #SALDO
+                    opcao = input('Digite o que deseja: ')
+                    if opcao == '1':
+                        print(f"Seu saldo é {usuarios[username]['saldo']}")
+                
+                    #DEPÓSITO
+                    elif opcao == '2':
+                        try:
+                            deposito = int(input('Digite o valor que deseja depositar: '))
+                        except ValueError:
+                            print('Valor inválido')
+                            continue  
+                          
+                        if deposito <=0:
+                            print('Valor inválido') 
+                        
+                        else:
+                            usuarios[username]['saldo'] += deposito
+                            print(f"Depósito realizado. Saldo atual: {usuarios[username]['saldo']}") 
+                    
+                    #SAQUE
+                    elif opcao == '3':
+                        try:
+                            saque = int(input('Digite o valor que deseja sacar: '))
+                        except ValueError: 
+                            print('Valor inválido')
+                            continue
+                        
+                        if saque <= 0:
+                            print('Valor inválido')
+                        elif saque <= usuarios[username]['saldo']:
+                            usuarios[username]['saldo'] -= saque
+                            print(f"Saque realizado. Saldo atual: {usuarios[username]['saldo']}")
+                        else:
+                            print('Saldo insuficiente')
+                    
+                    #SAINDO DO SISTEMA
+                    elif opcao == '4':
+                            print('Saindo do sistema...')
+                            break
+                    
+                    else:
+                        print('Opção inválida')
+
+            else: 
+                print('Senha incorreta')           
+        
+        # USUARIO NÃO EXISTE (CADASTRAR OU SAIR)
+        else:
+            print('Usuario não existe')
+            print('1 - Cadastrar')
+            print('2 - Sair')
+            escolha2 = input('Escolha o que deseja: ')
+            
+            #CADASTRO
+            if escolha2 == '1':
+                cadastro = input('Digite seu nome de usuario: ').lower()
+                if cadastro in usuarios:
+                    print('Usuário já existe')
+                else:
+                    senha = input('Crie uma senha: ')
+                    
+                    usuarios[cadastro] = {
+                    'senha': senha,
+                    'saldo': 0
+                    }
+                    print('Cadastro realizado com sucesso!')
+            elif escolha2 == '2':
+                continue
+
+    elif opcao == '2':
+        cadastro = input('Digite seu nome de usuario: ').lower()
+        
+        if cadastro in usuarios:
+            print('Usuário já existe')
+        
+        else:
+            senha = input('Crie uma senha: ')
+            
+            usuarios[cadastro] = {
+                'senha': senha,
+                'saldo': 0
+            }
+            
+            print('Cadastro realizado com sucesso!')
+                    
+
+                    
+                    
