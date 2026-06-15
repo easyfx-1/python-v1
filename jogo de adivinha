@@ -1,0 +1,36 @@
+Palavra_secreta = 'JESUS CRISTO É O SENHOR'.lower()
+letras_acertadas = ''
+erros = 0
+
+while True:
+    
+    Digite_uma_letra = input('Digite uma letra:').lower()
+    letra_digitada = Digite_uma_letra
+    palavra_montada = ''
+    
+    
+    if letra_digitada in Palavra_secreta:
+        letras_acertadas += letra_digitada
+
+    elif letra_digitada not in Palavra_secreta:
+        print(f'\nNão possui a letra: {letra_digitada.upper()}')
+        erros += 1 
+        
+    for letra in Palavra_secreta:
+        if letra in letras_acertadas:
+            print(letra, end='')
+            palavra_montada += letra
+        else:
+            print('_', end='')
+            palavra_montada += '_'
+    
+    if palavra_montada == Palavra_secreta:
+        print('\nVOCÊ GANHOU')
+        break
+       
+
+    if erros >=3:
+        print('\nvocê perdeu')
+        break
+
+    print()
